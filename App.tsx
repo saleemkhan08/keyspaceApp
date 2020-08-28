@@ -1,21 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { OnBoarding } from './src/auth';
+import { LoadAssets } from './src/components';
+
+const fonts = {
+  "Quicksand-Bold": require("./assets/fonts/Quicksand-Bold.ttf"),
+  "Quicksand-Light": require("./assets/fonts/Quicksand-Light.ttf"),
+  "Quicksand-Medium": require("./assets/fonts/Quicksand-Medium.ttf"),
+  "Quicksand-Regular": require("./assets/fonts/Quicksand-Regular.ttf"),
+  "Quicksand-SemiBold": require("./assets/fonts/Quicksand-SemiBold.ttf"),
+
+};
+
+const AuthenticationStack = createStackNavigator();
+
+const AuthenticationNavigator = () => {
+  return (
+    <AuthenticationStack.Navigator headerMode={"none"}>
+      <AuthenticationStack.Screen name="OnBoarding" component={OnBoarding} />
+    </AuthenticationStack.Navigator>);
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <LoadAssets {...{ fonts }}>
+      <AuthenticationNavigator />
+    </LoadAssets>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
